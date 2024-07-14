@@ -1,0 +1,37 @@
+<div class="wishlist-container ">
+    <app-breadcrumb [listPath]="listPath"></app-breadcrumb>
+    <div class="list-item-container grid grid-cols-3 gap-4">
+        <div class="item-container p-3 rounded-md bg-white" *ngFor="let wishModel of wishPage.content, let index = index">
+            <div class="top-item-container flex gap-4 pb-4 border-b">
+                <div class="image-container" (click)="goToDetail(wishModel.comicId)">
+                    <img [src]="URL_FILE + wishModel.comicImg" alt="">
+                </div>
+                <div class="info-container flex flex-col justify-between">
+                  <div>
+                    <h2 class=" line-clamp-1 font-medium text-[18px] hover:underline">
+                      <b>{{ wishModel.comicName }}</b>
+                    </h2>
+                    <span><i>{{ wishModel.authorName }}</i></span>
+                    <p class=" line-clamp-3">
+                        {{ wishModel.contents }}
+                    </p>
+                  </div>
+
+                  <div class="text-end ">
+                    <button class=" p-2 rounded-md bg-gray-500 text-white font-medium">
+                      <a (click)="deleteWishlist(wishModel.id)"> Bỏ thích</a>
+                    </button>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-pagination [currentPage]="currentPage"
+                    [totalElement]="wishPage.totalElements"
+                    [totalPage]="wishPage.totalPages"
+                    [pageSize]="pageSize"
+                    [elementInCurrentPage]="numberWish"
+                    (pageChange)="handlePageChange($event)"
+    >
+    </app-pagination>
+</div>

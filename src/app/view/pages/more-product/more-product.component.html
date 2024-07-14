@@ -1,0 +1,65 @@
+<div class="container-more-products mx-auto p-7">
+    <app-breadcrumb [listPath]="listPath"></app-breadcrumb>
+    <div class="nav-container">
+        <app-navbar></app-navbar>
+    </div>
+    <div class="grid grid-cols-4 gap-4 bg-slate-100 p-5">
+        <div class=" col-span-4">
+            <div class="text-right my-5" *ngIf="comicsPage.totalElements !== 0">
+                <select name="" id="" class="py-3 px-3 border">
+                    <option value="">{{ comicsPage.totalElements }} sản phẩm</option>
+                </select>
+            </div>
+            <div class="list-product-container grid grid-cols-3 gap-4"
+                 *ngIf="comicsPage.totalElements !== 0">
+                <div class="item-container p-3 rounded-md bg-white"
+                     *ngFor="let comic of comicsPage.content, let index = index"
+                     (click)="goToDetail(comic.id)">
+                    <div class="top-item-container flex gap-4 pb-4 border-b">
+                        <div class="image-container">
+                            <img style="min-width: 140px; min-height: 180px" [src]="LINK_IMAGE + comic.imgComic" alt="">
+                        </div>
+                        <div>
+                            <h2 class=" line-clamp-1 font-medium text-[18px] hover:underline">
+                              <b>{{ comic.comicName }} </b>
+                            </h2>
+                            <span><i>{{ comic.authorName }}</i></span>
+                            <p class=" line-clamp-3">
+                                {{ comic.contents }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class=" mt-4 flex justify-between items-center">
+                        <span class=" p-2 rounded-md bg-red-500 text-white font-medium">
+                            Còn lại {{ comic.residualQuantity }}
+                        </span>
+                        <span class="text-red-500">
+                          <i>Đang giảm {{comic.sale}}%</i>
+                        </span>
+                        <span>
+                            <span class="line-through mr-4">
+                                {{ comic.price }} đ
+                            </span>
+                            <span class="text-red-500 text-lg font-medium">
+                                {{ calculatePrice(comic.price, comic.sale) }} đ
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="no-content"
+                 *ngIf="comicsPage.totalElements === 0">
+                Không có sản phẩm nào
+            </div>
+            <app-pagination [currentPage]="currentPage"
+                            [totalElement]="comicsPage.totalElements"
+                            [totalPage]="comicsPage.totalPages"
+                            [pageSize]="pageSize"
+                            [elementInCurrentPage]="numberComic"
+                            (pageChange)="handlePageChange($event)"
+                            *ngIf="comicsPage.totalElements !== 0"
+            >
+            </app-pagination>
+        </div>
+    </div>
+</div>

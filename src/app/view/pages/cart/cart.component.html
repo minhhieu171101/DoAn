@@ -1,0 +1,100 @@
+<div class="cart-container mx-auto my-4">
+    <app-breadcrumb [listPath]="listPath"></app-breadcrumb>
+    <div class=" grid grid-cols-5 gap-5">
+        <div class="bg-white rounded-md p-3 col-span-4">
+            <div class="py-3 border-b">
+                <span class="">
+                    Giỏ hàng
+                </span>
+            </div>
+            <div class="cart-body-container"
+                 *ngIf="comicOrders !== undefined">
+                <div class=" grid grid-cols-5 gap-3 py-2 border-b border-dashed"
+                     *ngFor="let comicOrder of comicOrders, let index = index">
+                    <div (click)="goToDetail(comicOrder.comicId)"
+                         class="cursor-pointer">
+                        <img style="width: 140px; height: 180px" [src]="URL_FILE + comicOrder.imgComic" alt="">
+                    </div>
+                    <div class="col-span-2">
+                    <span class="line-clamp-1">
+                        {{index + 1}}. {{ comicOrder.comicName }}
+                    </span>
+                        <span class="block text-slate-400 text-sm" style="text-transform: capitalize">
+                        Loại: {{ comicOrder.typeName }}
+                    </span>
+                        <span class="text-sm">
+                        <span class="text-blue-500 hover:underline"
+                              style="cursor: pointer"
+                              (click)="openDeletePopup(comicOrder.comicOrderId)">
+                            Xóa
+                        </span>
+                        |
+                        <span class="text-blue-500 hover:underline"
+                                style="cursor: pointer"
+                              (click)="addToWishList(comicOrder.comicId)"
+                        >
+                            Thêm vào yêu thích
+                        </span>
+                    </span>
+                    </div>
+                    <div>
+                    <span class="font-bold">
+                        Giá: {{comicOrder.totalPrice * comicOrder.quantity}} đ
+                    </span>
+                    </div>
+                    <div class="font-bold"> Số lượng:
+                      <div class="border inline-block bg-slate-50">
+                        <div type="text" class="w-[3rem] text-center py-2 text-orange-500">
+                          {{comicOrder.quantity}}
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-body-no-content"
+                 *ngIf="comicOrders?.length === 0 || comicOrders === undefined">
+                <p>Hiện chưa có sản phẩm nào</p>
+            </div>
+        </div>
+        <div class="  p-3">
+            <div class="text-center bg-white pt-3 rounded-md overflow-hidden">
+                <span class="text-2xl font-semibold mb-3 block">
+                    {{ totalProduct }} sản phẩm
+                </span>
+                <span class=" text-red-600 font-bold text-2xl">
+                    {{ totalPrice }} đ
+                </span>
+                <p>(Chưa có cước vận chuyển)</p>
+
+                <div class=" mt-5 bg-orange-500">
+                    <button class="doOrderBtn py-5 text-white text-xl"
+                            (click)="gotoPay()"
+                            [disabled]="comicOrders.length === 0">
+                        Tiến hành đặt hàng
+                    </button>
+                </div>
+                <button class="detail-order-info"
+                        (click)="gotoDetailInfoOrder()">
+                    Thông tin mua hàng
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #deletePopup class="delete-cart-popup">
+    <div class="delete-cart-popup-container">
+        <div class="popup-header">
+            <h2 class="popup-title">
+                Xóa sản phẩm
+            </h2>
+        </div>
+        <div class="popup-body">
+            <p class="body-title">Bạn có chắc chắn muốn xóa?</p>
+        </div>
+        <div class="popup-footer">
+            <button class="btn-cancel" (click)="closeDialog()">Hủy</button>
+            <button class="btn-confirm" (click)="delete()">Xác nhận</button>
+        </div>
+    </div>
+</ng-template>

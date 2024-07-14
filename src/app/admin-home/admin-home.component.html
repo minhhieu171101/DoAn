@@ -1,0 +1,69 @@
+<div class="flex admin-home-container">
+    <app-sidebar></app-sidebar>
+    <div class="p-4 w-full admin-home-content" style="background-color: white">
+      <div>
+        <select [(ngModel)]="statisticComic.month" name="" class="py-3 px-3 border" (change)="getStatistic()">
+          <option [value]="null">Tất cả</option>
+          <option *ngFor="let month of months"
+                  [value]="month" selected="statisticComic.month === month">Tháng {{month}}</option>
+        </select>
+
+        <select [(ngModel)]="statisticComic.year" name="" class="py-3 px-3 border"  (change)="getStatistic()">
+          <option *ngFor="let year of years"
+                  [value]="year" selected="statisticComic.year === year">Năm {{year}}</option>
+        </select>
+      </div>
+        <h1 style="text-transform: uppercase; text-align: center"><b>Thống kê loại truyện chạy nhất</b> </h1> <br>
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg table-content">
+            <table class="w-full text-sm text-left
+                    rtl:text-right text-gray-500 dark:text-gray-400"
+                   *ngIf="statisticComics.length > 0">
+                <thead class="text-xs text-gray-700
+                        uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        STT
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Thể loại truyện
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Tổng truyện bán được
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Tổng thu nhập
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                    *ngFor="let comic of statisticComics, let index = index">
+                    <th scope="row"
+                        class="px-6 py-4 font-medium text-gray-900
+                        whitespace-nowrap dark:text-white"
+                    >
+                        {{ index + 1 }}
+                    </th>
+                    <td class="px-6 py-4" style="text-transform: capitalize">
+                        {{ comic.comicTypeName }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ comic.totalSold }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ comic.totalIncome }} đ
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="no-content"
+                 *ngIf="statisticComics.length === 0">
+                Chưa có thông tin gì
+            </div>
+          <div style="background-color: white; border: 4px solid orange" class="mt-10">
+            <h1 style="text-transform: uppercase; text-align: center">Tổng doanh thu tháng này</h1><hr>
+            <div style="color: red; text-align: center"><b> {{ totalMonthIncome }}đ </b></div>
+          </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,164 @@
+<div class="p-4 w-full admin-comic-container">
+    <div class="flex">
+        <app-sidebar></app-sidebar>
+        <div class="admin-comic-content relative shadow-md sm:rounded-lg container mx-auto" >
+            <div class="mb-5">
+              <div class="flex items-center w-full justify-between px-5">
+                <form class="w-[400px] mr-5">
+                  <label for="default-search"
+                         class="mb-2 text-sm font-medium
+                           text-gray-900 sr-only dark:text-white">
+                    Search
+                  </label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                      <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                           xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                              stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                      </svg>
+                    </div>
+                    <input type="search" id="default-search"
+                           class="block w-full p-4 ps-10 text-sm text-gray-900
+                               border border-gray-300 rounded-lg bg-gray-50
+                               focus:ring-blue-500 focus:border-blue-500
+                               dark:bg-gray-700 dark:border-gray-600
+                               dark:placeholder-gray-400 dark:text-white
+                               dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           placeholder="Nhập từ khóa" required
+                           [(ngModel)]="comic.searchKey"
+                           [ngModelOptions]="{standalone: true}"/>
+                    <button type="submit"
+                            (click)="searchComic(0)"
+                            class="text-white absolute end-2.5 bottom-2.5
+                                bg-blue-700 hover:bg-blue-800 focus:ring-4
+                                focus:outline-none focus:ring-blue-300 font-medium
+                                rounded-lg text-sm px-4 py-2 dark:bg-blue-600
+                                dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                      Tìm kiếm
+                    </button>
+                  </div>
+                </form>
+                <button mat-button
+                        (click)="openDialog(comic)"
+                        type="button"
+                        class="text-white bg-blue-700 hover:bg-blue-800
+                     focus:ring-4 focus:ring-blue-300 font-medium
+                     rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600
+                      dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                  Thêm
+                </button>
+              </div>
+
+            </div>
+            <div class="table-container">
+                <table class="w-full text-sm text-left
+                   rtl:text-right text-gray-500 dark:text-gray-400"
+                       *ngIf="pageComic.totalElements > 0">
+                    <thead class="text-xs text-gray-700
+                        uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            STT
+                        </th>
+                        <th scope="col" class="px-6 py-5">
+                            Ảnh
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Tên truyện
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Tác giả
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Thể loại
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Ngày phát hành
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Số lượng
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Giá tiền
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Giảm giá
+                        </th>
+<!--                        <th scope="col" class="px-6 py-3">-->
+<!--                            Nội dung chính-->
+<!--                        </th>-->
+                        <th scope="col" class="px-6 py-3">
+
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                        *ngFor="let comic of pageComic.content, let index = index">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ index + 1 }}
+                        </th>
+                        <td class="px-6 py-4 item-image">
+                            <img style="width: 100%; height: 100%" [src]="URL_FILE + comic.imgComic" alt="" class="object-contain">
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ comic.comicName }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ comic.authorName }}
+                        </td>
+                        <td class="px-6 py-4 line-clamp-6 flex flex-col items-center" style="text-transform: capitalize">
+                            {{ comic.typeName }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ comic.releaseDate }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ comic.residualQuantity }}
+                        </td>
+                        <td class="px-6 py-4" style="white-space: nowrap;">
+                            {{ comic.price }} đ
+                        </td>
+                        <td class="px-6 py-4" >
+                            {{ comic.sale }}%
+                        </td>
+<!--                        <td class="px-6 py-4 line-clamp-6" >-->
+<!--                            {{ comic.contents }}-->
+<!--                        </td>-->
+                        <td class="px-6 py-4">
+                            <a mat-button
+                               (click)="openDialog(comic)"
+                               class="font-medium text-blue-600
+                            dark:text-blue-500 hover:underline
+                            cursor-pointer">
+                                Sửa
+                            </a>
+                            <br>
+                            <a mat-button
+                               (click)="openDialogDelete(comic)"
+                               class="font-medium text-red-600
+                            dark:text-blue-500 hover:underline
+                            cursor-pointer">
+                                Xóa
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="no-content"
+                 *ngIf="pageComic.totalElements === 0">
+                Chưa có thông tin gì
+            </div>
+            <app-pagination [currentPage]="currentPage"
+                            [totalElement]="pageComic.totalElements"
+                            [totalPage]="pageComic.totalPages"
+                            [pageSize]="pageSize"
+                            [elementInCurrentPage]="numberComic"
+                            (pageChange)="handlePageChange($event)"
+            >
+            </app-pagination>
+        </div>
+    </div>
+</div>

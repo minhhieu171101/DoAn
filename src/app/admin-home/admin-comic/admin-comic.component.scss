@@ -1,0 +1,14 @@
+.admin-comic-container {
+  min-height: calc(100vh - 300px);
+  padding: 16px;
+
+  .admin-comic-content {
+    margin-left: 258px;
+  }
+
+  .item-image {
+    height: 150px;
+    width: 200px;
+    object-fit: contain;
+  }
+}

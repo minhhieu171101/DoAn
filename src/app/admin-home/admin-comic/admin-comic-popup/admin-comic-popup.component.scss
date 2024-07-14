@@ -1,0 +1,26 @@
+.admin-comic-popup-container {
+  max-height: 90vh;
+  ::-webkit-scrollbar {
+    width: 5px !important;
+  }
+
+  .label-input-image {
+    display: flex;
+    height: 80px;
+    width: 200px;
+    border: 1px solid;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 0 8px;
+  }
+
+  .image-name {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+  }
+}

@@ -1,0 +1,233 @@
+<div class="container mx-auto user-container">
+    <app-breadcrumb [listPath]="listPath"></app-breadcrumb>
+    <div class="px-20 py-8 bg-white">
+        <form>
+            <div class="image-container">
+                <img class="rounded"
+                     [src]="URL_FILE + user.imgUser"
+                     alt=""
+                     *ngIf="tempUserImgUpload === undefined || tempUserImgUpload === null">
+
+                <img class="rounded"
+                     [src]="tempUserImgUpload"
+                     alt=""
+                     *ngIf="tempUserImgUpload !== undefined">
+            </div>
+
+            <input type="file"
+                   accept="image/*"
+                   #inputImage
+                   (change)="updateImage(inputImage.files)"
+                   id="input-image"
+                   class="hidden">
+            <label for="input-image" class="cursor-pointer label-input-image">
+                Chọn ảnh
+                <fa-icon [icon]="faCamera"></fa-icon>
+                <span *ngIf="user.file !== null && user.file !== undefined"
+                      class="image-name">
+                    {{user.file.name}}
+                </span>
+            </label>
+            <br>
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
+                <div>
+                    <label for="username"
+                        class="block mb-2 text-sm
+                        font-medium text-gray-900
+                        dark:text-white">
+                        Tên tài khoản
+                    </label>
+                    <input type="text"
+                        id="username"
+                        class="bg-gray-50 border
+                        border-gray-300 text-gray-900
+                        text-sm rounded-lg focus:ring-blue-500
+                        focus:border-blue-500 block w-full p-2.5
+                        dark:bg-gray-700 dark:border-gray-600
+                        dark:placeholder-gray-400 dark:text-white
+                        dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="John"
+                        [(ngModel)]="user.username"
+                        [ngModelOptions]="{standalone: true}"
+                        required/>
+                </div>
+                <div>
+                    <label for="fullname"
+                            class="block mb-2 text-sm font-medium
+                            text-gray-900 dark:text-white">
+                            Họ và tên
+                    </label>
+                    <input type="text"
+                            id="fullname"
+                            class="bg-gray-50 border
+                            border-gray-300 text-gray-900
+                            text-sm rounded-lg focus:ring-blue-500
+                            focus:border-blue-500 block w-full p-2.5
+                            dark:bg-gray-700 dark:border-gray-600
+                            dark:placeholder-gray-400 dark:text-white
+                            dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Doe"
+                            [(ngModel)]="user.fullName"
+                            [ngModelOptions]="{standalone: true}"
+                            required/>
+                </div>
+                <div>
+                    <label for="phone"
+                            class="block mb-2 text-sm
+                            font-medium text-gray-900
+                            dark:text-white">
+                            Số điện thoại
+                    </label>
+                    <input type="tel"
+                            id="phone"
+                            class="bg-gray-50 border
+                            border-gray-300 text-gray-900
+                            text-sm rounded-lg focus:ring-blue-500
+                            focus:border-blue-500 block w-full
+                            p-2.5 dark:bg-gray-700 dark:border-gray-600
+                            dark:placeholder-gray-400 dark:text-white
+                            dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="123-45-678"
+                            pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                            [(ngModel)]="user.phone"
+                            [ngModelOptions]="{standalone: true}"
+                            required/>
+                </div>
+                <div>
+                    <label for="birthday"
+                            class="block mb-2 text-sm font-medium
+                            text-gray-900 dark:text-white">
+                            Năm sinh
+                    </label>
+                    <input type="date"
+                            id="birthday"
+                            class="bg-gray-50 border border-gray-300
+                            text-gray-900 text-sm rounded-lg
+                            focus:ring-blue-500 focus:border-blue-500
+                            block w-full p-2.5 dark:bg-gray-700
+                            dark:border-gray-600 dark:placeholder-gray-400
+                            dark:text-white dark:focus:ring-blue-500
+                            dark:focus:border-blue-500"
+                            placeholder=""
+                            #date
+                            (input)="updateBirthDay(date.value)"
+                            [value]="convertDate(user.birthday)"
+                            required/>
+                </div>
+            </div>
+            <div class="gender-container flex-row flex items-center mb-4">
+                <span class="font-bold me-4">Giới tính:</span>
+                <div class="male-container flex items-center">
+                    <label for="male">Nam</label>
+                    <input type="radio"
+                           id="male"
+                           value="1"
+                           name="gender"
+                           class="me-4 ms-2 mt-1"
+                            [(ngModel)]="gender"
+                           [checked]="gender === '1'">
+                </div>
+                <div class="male-container flex items-center">
+                    <label for="female">Nữ</label>
+                    <input type="radio"
+                           id="female"
+                           value="0"
+                           name="gender"
+                           class="ms-2 mt-1"
+                           [(ngModel)]="gender"
+                            [checked]="gender === '0'">
+                </div>
+            </div>
+            <div class="mb-6">
+                <label for="address"
+                        class="block mb-2 text-sm
+                        font-medium text-gray-900
+                        dark:text-white">
+                        Địa chỉ
+                </label>
+                <input type="url"
+                        id="address"
+                        class="bg-gray-50 border border-gray-300
+                        text-gray-900 text-sm rounded-lg
+                        focus:ring-blue-500 focus:border-blue-500
+                        block w-full p-2.5 dark:bg-gray-700
+                        dark:border-gray-600 dark:placeholder-gray-400
+                        dark:text-white dark:focus:ring-blue-500
+                        dark:focus:border-blue-500"
+                        placeholder="flowbite.com"
+                        [(ngModel)]="user.address"
+                        [ngModelOptions]="{standalone: true}"
+                        required/>
+            </div>
+            <div class="mb-6">
+                <label for="email"
+                        class="block mb-2 text-sm font-medium
+                        text-gray-900 dark:text-white">
+                        Gmail
+                </label>
+                <input type="email"
+                       id="email"
+                        class="bg-gray-50 border border-gray-300
+                        text-gray-900 text-sm rounded-lg
+                        focus:ring-blue-500 focus:border-blue-500
+                        block w-full p-2.5 dark:bg-gray-700
+                        dark:border-gray-600 dark:placeholder-gray-400
+                        dark:text-white dark:focus:ring-blue-500
+                        dark:focus:border-blue-500"
+                        placeholder="john.doe@company.com"
+                        [(ngModel)]="user.email"
+                        [ngModelOptions]="{standalone: true}"
+                        required/>
+            </div>
+            <div class="mb-6">
+                <label for="password"
+                        class="block mb-2 text-sm font-medium
+                        text-gray-900 dark:text-white">
+                    Mật khẩu
+                </label>
+                <input type="password"
+                        id="password"
+                        class="bg-gray-50 border border-gray-300
+                        text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                        focus:border-blue-500 block w-full p-2.5
+                        dark:bg-gray-700 dark:border-gray-600
+                        dark:placeholder-gray-400 dark:text-white
+                        dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="•••••••••"
+                       [(ngModel)]="user.password"
+                       [ngModelOptions]="{standalone: true}"
+                        required/>
+            </div>
+            <div class="mb-6">
+                <label for="confirm_password"
+                        class="block mb-2 text-sm font-medium
+                        text-gray-900 dark:text-white">
+                        Xác nhận mật khẩu
+                </label>
+                <input type="password"
+                        id="confirm_password"
+                        class="bg-gray-50 border border-gray-300
+                        text-gray-900 text-sm rounded-lg
+                        focus:ring-blue-500 focus:border-blue-500
+                        block w-full p-2.5 dark:bg-gray-700
+                        dark:border-gray-600 dark:placeholder-gray-400
+                        dark:text-white dark:focus:ring-blue-500
+                        dark:focus:border-blue-500"
+                        placeholder="•••••••••"
+                       [(ngModel)]="user.rePassword"
+                       [ngModelOptions]="{standalone: true}"
+                        required/>
+            </div>
+            <button type="submit"
+                        class="text-white bg-blue-700 hover:bg-blue-800
+                        focus:ring-4 focus:outline-none focus:ring-blue-300
+                        font-medium rounded-lg text-sm w-full sm:w-auto
+                        px-5 py-2.5 text-center dark:bg-blue-600
+                        dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        (click)="updateUserInfo()">
+                Cập nhật
+            </button>
+        </form>
+    </div>
+
+</div>

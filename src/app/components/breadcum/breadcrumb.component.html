@@ -1,0 +1,17 @@
+<nav class="bread-crumb-container flex justify-between" aria-label="Breadcrumb">
+    <ol class=" bread-crumb-list inline-flex items-center mb-3 sm:mb-0">
+        <li class="bread-crumb-item" *ngFor="let path of listPath, let index = index">
+            <div class="flex items-center">
+                <div
+                        class="inline-flex items-center
+                        px-3 py-2 text-sm font-normal
+                        text-center text-gray-900
+                        rounded-lg
+                        ">
+                    {{ path }}
+                </div>
+            </div>
+            <span class="mx-2 text-gray-400" *ngIf="index < listPath.length - 1">/</span>
+        </li>
+    </ol>
+</nav>

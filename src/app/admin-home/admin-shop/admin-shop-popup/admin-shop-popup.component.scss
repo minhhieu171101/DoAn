@@ -1,0 +1,42 @@
+.admin-shop-popup-container {
+  border-radius: 8px;
+
+  .header {
+    padding: 16px 0;
+    border-bottom: 1px solid #f3eaea;
+
+    .header-title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+
+  .body {
+    padding: 8px 16px;
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 0;
+    border-top: 1px solid #dedada;
+
+    button {
+      padding: 8px 16px;
+    }
+
+    .cancel {
+      margin-right: 16px;
+      background: #e6e6e6;
+      border-radius: 4px;
+    }
+
+    .confirm {
+      background: rgb(241 92 34);
+      color: white;
+      border-radius: 4px;
+    }
+  }
+}

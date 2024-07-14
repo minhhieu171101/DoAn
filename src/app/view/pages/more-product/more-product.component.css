@@ -1,0 +1,40 @@
+.container-more-products {
+    padding: 24px 96px;
+
+    .list-product-container {
+        .item-container {
+            cursor: pointer;
+
+            .top-item-container {
+                .image-container {
+                    width: 200px;
+                    height: 180px;
+                    background: #f0ecec;
+
+                    img {
+                        object-fit: contain;
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+                .info-container {
+                    width: 192px;
+                }
+            }
+        }
+
+        .item-container:hover {
+            background: #cfcece;
+        }
+    }
+
+    .no-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 600;
+        height: 200px;
+    }
+}

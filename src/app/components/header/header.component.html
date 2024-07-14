@@ -1,0 +1,51 @@
+<div class="header-container bg-slate-100 shadow-lg">
+    <div class="container mx-auto">
+        <div class="web-name flex items-center justify-between">
+            <div (click)="routerHome()">
+                <img class="logo" src="../../../assets/images/logo-new.png" alt="">
+            </div>
+            <div class="flex items-center bg-white">
+                <div class="">
+                    <input type="text"
+                           name=""
+                           id="search-input"
+                           class="py-3 px-3 outline-none min-w-[600px]"
+                           placeholder="Nhập truyện cần tìm"
+                           [(ngModel)]="searchKey"
+                           [ngModelOptions]="{standalone: true}">
+                    <button class="p-3 px-4 hover:bg-slate-200"
+                            (click)="search()">
+                        <fa-icon [icon]="faMagnifyingGlass" class="text-[#f15c22]"></fa-icon>
+                    </button>
+                </div>
+
+            </div>
+            <div class="flex items-center">
+                <fa-icon [icon]="faHeadset" class="text-2xl mr-2 text-[#f15c22]"></fa-icon>
+                <div>
+
+                    <span class="block text-[#f15c22] text-xl">01679297303</span>
+                    Hot line
+                </div>
+            </div>
+            <div class="flex items-center hover:underline"
+                (click)="routerCart()">
+                <fa-icon [icon]="faCartShopping" class="text-2xl mr-2 text-[#f15c22]"></fa-icon>
+                <span> Giỏ hàng</span>
+            </div>
+
+            <div class="user-header-info" *ngIf="isLogin"
+                (click)="routerLogin()">
+                {{ userObject.username }}
+            </div>
+            <div class="user-header-info" *ngIf="isLogin"
+                 (click)="signOut()">
+                Đăng xuất
+            </div>
+            <div class="user-header-info" *ngIf="!isLogin"
+                 (click)="routerLogin()">
+                Đăng nhập
+            </div>
+        </div>
+    </div>
+</div>

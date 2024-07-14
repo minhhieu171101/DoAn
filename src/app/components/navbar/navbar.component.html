@@ -1,0 +1,56 @@
+<div class="bg-white shadow-md">
+    <div class="container mx-auto">
+        <div class=" grid grid-cols-4 gap-4">
+            <div class="border border-gray-500 border-t-0 py-4 pl-2">
+                <fa-icon [icon]="faBars" class="mr-3 text-xl"></fa-icon>
+                <span class="mr-3">Thể loại truyện</span>
+                <fa-icon [icon]="faCaretDown" class=""></fa-icon>
+
+            </div>
+            <div (click)="viewMore()" class="py-4 pl-2 flex items-center">
+                <img src="../../assets/images/sale-1.png" width="30" alt="" class="mr-2">
+                <span>Xem thêm giảm giá</span>
+            </div>
+            <div (click)="toWishlist()" class="py-4 pl-2 flex items-center cursor-pointer">
+                <img src="../../assets/images/icon-trai-tim-tron_054626777.png" width="30" alt="" class="mr-2">
+                <span>
+                    Yêu thích
+                </span>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="nav-container container mx-auto">
+    <div class="grid grid-cols-4 gap-4 bg-white">
+        <div class="">
+            <ul class="overflow-y-scroll" style="max-height: 368px;">
+                <li class="py-3 px-2"
+                    style="cursor: pointer; text-transform: capitalize"
+                    *ngFor="let typeComic of typeComics, let index = index"
+                    (click)="findForType(typeComic.id)"
+                    [ngClass]="itemActive() === typeComic.id ? 'active' : ''">
+                    <fa-icon [icon]="faBookOpen" class="text-xl mr-3"></fa-icon>
+                    <span>{{typeComic.typeName}}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-span-3 p-3">
+            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel"
+                                [config]="slideConfig"
+                                (init)="slickInit($event)"
+                                (breakpoint)="breakpoint($event)">
+                <div ngxSlickItem class="slide" *ngFor="let fileImage of listImageSlide, let index = index">
+                    <img  [src]="fileImage" alt="" width="100%" style="max-height: 380px">
+                </div>
+                <!-- Add more images here if needed -->
+            </ngx-slick-carousel>
+        </div>
+
+    </div>
+    <div class="grid grid-cols-3 gap-4 my-3">
+        <div *ngFor="let imageQC of listImageQC, let index = index">
+            <img [src]="imageQC" alt=""  width="100%" style="max-height: 182px; min-width: 416px">
+        </div>
+    </div>
+</div>

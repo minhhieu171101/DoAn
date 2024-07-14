@@ -1,0 +1,14 @@
+.header-container {
+  padding: 16px 36px 16px 16px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+  .web-name {
+    cursor: pointer;
+
+    .logo {
+      height: 32px;
+    }
+  }
+}

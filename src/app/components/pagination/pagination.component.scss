@@ -1,0 +1,41 @@
+.pagination-container {
+  height: 44px;
+  align-items: center;
+  display: flex;
+  padding: 0 16px;
+  margin-top: 10px;
+  background: white;
+
+  .pagination-body {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    .pagination-left {
+      display: flex;
+      flex-direction: row;
+
+      > div {
+        padding: 0 8px;
+      }
+    }
+
+    .pagination-right {
+      display: flex;
+      flex-direction: row;
+
+      .current-page {
+        background: #a79f9f;
+      }
+
+      > div {
+        padding: 0 8px;
+        cursor: pointer;
+      }
+
+      > div:hover {
+        background: #e7e7e7;
+      }
+    }
+  }
+}

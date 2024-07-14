@@ -1,0 +1,125 @@
+<div class="product-detail-container mx-auto">
+    <!-- Breadcrumb -->
+    <app-breadcrumb [listPath]="listPath"></app-breadcrumb>
+    <div class=" grid grid-cols-4 gap-3 bg-white p-8 rounded-md shadow-md">
+        <div class="col-span-1">
+            <img [src]="LINK_IMAGE + comicDetail.imgComic" alt="" style="width: 100%;">
+        </div>
+        <div class="col-span-2">
+            <span class="uppercase text-2xl font-medium block mb-2">
+                {{ comicDetail.comicName }}
+            </span>
+            <span class="block font-bold text-2xl text-orange-500 mb-2">
+                {{ calculatePrice(comicDetail.price, comicDetail.sale) }} đ
+            </span>
+            <span class="flex-row block" style="text-transform: capitalize">
+                Thể loại:
+                <span class="text-blue-500">{{comicDetail.typeName}}</span>
+            </span>
+            <span class="text-sm">
+                Tình trạng:
+                <span class="text-orange-500" *ngIf="comicDetail.residualQuantity > 0">Còn hàng</span>
+                <span class="text-orange-500" *ngIf="comicDetail.residualQuantity < 1">Hết hàng</span>
+            </span>
+            <span class="text-sm block mt-2">
+                <i> Tác giả: {{ comicDetail.authorName }} </i>
+            </span>
+            <span class="text-sm block mt-2">
+                Ngày phát hành: {{ comicDetail.releaseDate | date:'dd-MM-yyyy'}}
+            </span>
+            <div class=" mt-3 ">
+                <span class=" inline-block mr-3">Số Lượng:</span>
+                <div class="border inline-block bg-slate-50">
+                    <span class=" px-3 py-3 cursor-pointer"
+                          (click)="decrease()">
+                        -
+                    </span>
+                    <input type="text"
+                           oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                           class="w-[3rem] text-center py-3 text-orange-500"
+                           [(ngModel)]="quantity"
+                           (change)="validQuantity(quantity)">
+                    <span class=" px-3 py-3 cursor-pointer"
+                          (click)="increase()">
+                        +
+                    </span>
+                </div>
+            </div>
+            <div class=" mt-5 ">
+                <button class=" px-3 py-4 border border-orange-500
+                        rounded-md text-orange-500 mr-5"
+                        (click)="addToCart(comicDetail, false)"
+                >
+                    THÊM VÀO GIỎ HÀNG
+                </button>
+                <button class=" px-3 py-4 bg-orange-500 rounded-md text-white"
+                        (click)="gotoPay()"
+                >
+                    THÊM VÀ MUA NGAY
+                </button>
+            </div>
+
+            <div class=" my-6">
+                Gọi đặt hàng
+                <span class="text-orange-500 font-medium">(028) 3820 7153</span>
+                hoặc
+                <span class="text-orange-500 font-medium">(028) 3820 7153</span>
+            </div>
+
+            <div>
+                <span class="font-medium">
+                    Tóm tắt nội dung truyện
+                </span>
+                <p class=" line-clamp-5">
+                    {{comicDetail.contents }}
+                </p>
+            </div>
+        </div>
+        <div class="p-4">
+            <ul class="border p-4">
+                <li class="py-1.5 text-sm" (click)="addToWishlist()">
+                    <span>
+                        <fa-icon [icon]="faHeart"
+                                 class="text-xl mr-3 cursor-pointer"
+                                 ></fa-icon>
+                        Thêm vào yêu thích
+                    </span>
+                </li>
+                <li class="py-1.5 text-sm">
+                    <span (click)="routerCart()">
+                        <fa-icon [icon]="faCartShopping" class="text-xl mr-3"></fa-icon>
+                        Xem thông tin giỏ hàng
+                    </span>
+                </li>
+                <li class="py-1.5 text-sm">
+                    <span (click)="gotoDetailInfoOrder()">
+                        <fa-icon [icon]="faTruck" class="text-xl mr-3"></fa-icon>
+                        Xem thông tin mua hàng
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class=" grid grid-cols-2 gap-4 mt-3 bg-white">
+        <div class=" flex w-full p-5">
+            <span class="mr-3">
+                <img [src]="LINK_AVATAR + user.imgUser" alt="" class="rounded-full w-[50px] h-[50px]">
+            </span>
+            <div class=" flex-1">
+                <form action="" class="border w-full">
+                    <textarea name="" id="" cols="20" rows="4" class="w-full p-2"
+                              placeholder="Viết đánh giá..."
+                              [(ngModel)]="comment.content"
+                              [ngModelOptions]="{standalone: true}"
+                    ></textarea>
+                    <div class="bg-slate-100 py-3 px-2 text-right">
+                        <button class="bg-blue-500 px-4 py-1.5 text-white rounded-md"
+                                (click)="createComment()">
+                            Đăng
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="pagination-container">
+    <div class="pagination-body">
+        <div class="pagination-left">
+            <div class="num-element">{{elementInCurrentPage}}</div>
+            /
+            <div class="num-element-per-page" *ngIf="pageSize < totalElement">{{pageSize}}</div>
+            <div class="num-element-per-page" *ngIf="pageSize >= totalElement">{{totalElement}}</div>
+            của
+            <div class="num-element-per-page">{{totalElement}}</div>
+        </div>
+        <div class="pagination-right">
+            <div class="first-element" (click)="firstPage()"><<</div>
+            <div class="first-element" (click)="previousPage()"><</div>
+            <div class="class-value-element"
+                 (click)="choosePage(currentPage -1)"
+                 *ngIf="(currentPage) >= 1"
+                 [class.current-page]="currentPage === (currentPage - 1)">
+                {{currentPage}}
+            </div>
+            <div class="class-value-element"
+                 (click)="choosePage(currentPage)"
+                 [class.current-page]="currentPage === currentPage">
+                {{currentPage+1}}
+            </div>
+            <div class="class-value-element"
+                 (click)="choosePage(currentPage + 1)"
+                 *ngIf="(currentPage + 2) <= totalPage"
+                 [class.current-page]="currentPage === (currentPage + 1)">
+                {{currentPage + 2}}
+            </div>
+            <div class="last-element" (click)="nextPage()">></div>
+            <div class="last-element" (click)="lastPage()">>></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,118 @@
+.login-container {
+    .login-content-wrapper {
+        padding-top: 64px;
+        .form-container {
+            padding: 36px 0;
+            border-width: 0;
+            border-top: solid rgb(192 189 189 / 10%);
+
+            .navbar-container {
+                margin-bottom: 24px;
+                
+                .nav-button {
+                    cursor: pointer;
+                }
+            }
+
+            .login-form {
+                .text-center {
+                    .submit {
+                        background: rgb(241 92 34 / var(--tw-text-opacity));
+                    }
+                    .submit:hover {
+                        opacity: 0.8;
+                    }
+                }
+            }
+
+            .register-form {
+                .text-center {
+                    .submit {
+                        background: rgb(241 92 34 / var(--tw-text-opacity));
+                    }
+                    .submit:hover {
+                        opacity: 0.8;
+                    }
+                }
+            }
+        }
+    }
+
+    .requirement {
+        color: red;
+    }
+
+    .err {
+        color: red;
+    }
+}
+
+.popup-container {
+    border-radius: 4px;
+    .popup-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        border-bottom: 1px solid #e9e4e4;
+
+        .popup-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .description {
+            font-size: 14px;
+        }
+    }
+    .popup-body {
+        height: 80px;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-items: center;
+        padding: 0 12px;
+        justify-content: center;
+
+        .code-input {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #a79f9f;
+            margin-right: 8px;
+            border-radius: 6px;
+            background: #fffefd;
+            justify-content: center;
+            text-align: center;
+            font-size: 32px;
+        }
+
+        .code-input:last-child {
+            margin-right: 0 !important;
+        }
+    }
+
+    .popup-footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        border-top: 1px solid #e9e4e4;
+
+        button {
+            padding: 4px 24px;
+            border-radius: 5px;
+        }
+
+        .btn-cancel {
+            background: #e9e4e4;
+            margin-right: 4px;
+        }
+
+        .btn-confirm {
+            background: rgb(241 92 34);
+            color: white;
+            margin-left: 4px;
+        }
+    }
+}
